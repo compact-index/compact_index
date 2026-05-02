@@ -11,8 +11,11 @@ group :documentation, :optional => true do
 end
 
 group :development do
+  gem "base64"
+  gem "benchmark"
+  gem "ostruct"
   gem "rake", "~> 13.2"
   gem "rspec", "~> 3"
-  gem "rubocop", "~> 1.50.2"
-  gem "rubocop-performance", :require => false
+  gem "rubocop", "~> 1.81.7"
+  gem "rubocop-performance", "~> 1.26", :require => false
 end

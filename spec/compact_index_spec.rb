@@ -120,7 +120,8 @@ describe CompactIndex do
 
     it "show created_at timestamp" do
       param = [build_version(:number => "1.0.1", :created_at => "2024-05-01T12:00:00Z")]
-      expect(CompactIndex.info(param)).to eq("---\n1.0.1 |checksum:sum+test_gem+1.0.1,created_at:2024-05-01T12:00:00Z\n")
+      expected = "---\n1.0.1 |checksum:sum+test_gem+1.0.1,created_at:2024-05-01T12:00:00Z\n"
+      expect(CompactIndex.info(param)).to eq(expected)
     end
 
     it "show created_at with other requirements" do

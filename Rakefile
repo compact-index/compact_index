@@ -18,7 +18,7 @@ begin
   end
 
   task :default => %i[rubocop spec]
-rescue LoadError => e
+rescue LoadError
   # rspec won't exist on production
   nil
 end
