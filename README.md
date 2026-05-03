@@ -1,8 +1,8 @@
-[![Ruby CI](https://github.com/rubygems/compact_index/actions/workflows/rubygems.yml/badge.svg)](https://github.com/rubygems/compact_index/actions/workflows/rubygems.yml)
+[![Ruby CI](https://github.com/compact-index/compact_index/actions/workflows/rubygems.yml/badge.svg)](https://github.com/compact-index/compact_index/actions/workflows/rubygems.yml)
 
 # CompactIndex
 
-> **Note**: This library is being integrated directly into [rubygems.org](https://github.com/rubygems/rubygems.org). For bug reports, feature requests, and questions, please use the [rubygems.org issue tracker](https://github.com/rubygems/rubygems.org/issues).
+> **Note**: For bug reports, feature requests, and questions, please use this repository's issue tracker.
 
 This gem is a **server-side** library that generates responses in the compact index format. It is not a client for consuming compact index endpoints. Client implementations exist separately in [RubyGems](https://github.com/rubygems/rubygems) and [Bundler](https://github.com/rubygems/rubygems/tree/master/bundler/lib/bundler/compact_index_client).
 
