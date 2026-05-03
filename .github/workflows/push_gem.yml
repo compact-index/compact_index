@@ -11,9 +11,9 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: rubygems/configure-rubygems-credentials@bc6dd217f8a4f919d6835fcfefd470ef821f5c44 # v1.0.0
+      - uses: rubygems/configure-rubygems-credentials@762a4b77c3300434bb57c7ce80b20e36231927aa # v2.0.0
         with:
-          role-to-assume: rg_oidc_akr_4dfqnvsems9z1dyszgd6
+          role-to-assume: rg_oidc_akr_keqd5sm7xsa5db2rpjj7
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Set remote URL
         run: |
