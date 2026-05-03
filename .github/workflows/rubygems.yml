@@ -16,58 +16,58 @@ permissions: # added using https://github.com/step-security/secure-workflows
 
 jobs:
   rubygems:
-    name: RubyGems on ${{ matrix.os.name }} (${{ matrix.ruby.name }})
-    runs-on: ${{ matrix.os.value }}
+    name: RubyGems on ${{ matrix.os }} (${{ matrix.ruby }})
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os:
-          - { name: Ubuntu, value: ubuntu-24.04 }
-          - { name: macOS, value: macos-14 }
-          - { name: Windows, value: windows-2022 }
+          - ubuntu-24.04
+          - macos-14
+          - windows-2022
 
         ruby:
-          - { name: "3.3", value: "3.3" }
-          - { name: "3.4", value: "3.4" }
-          - { name: "4.0", value: "4.0" }
+          - "3.3"
+          - "3.4"
+          - "4.0"
 
         include:
-          - ruby: { name: jruby-9.4, value: jruby-9.4.9.0 }
-            os: { name: Ubuntu, value: ubuntu-24.04 }
+          - ruby: jruby-9.4.9.0
+            os: ubuntu-24.04
 
           # - ruby: { name: truffleruby-24, value: truffleruby-24.1.0 }
-          #   os: { name: Ubuntu, value: ubuntu-24.04 }
+          #   os: ubuntu-24.04
 
-          - os: { name: Windows, value: windows-2022 }
-            ruby: { name: mswin, value: mswin }
+          - os: windows-2022
+            ruby: mswin
 
-          - os: { name: Ubuntu, value: ubuntu-24.04 }
-            ruby: { name: ruby-head, value: ruby-head }
+          - os: ubuntu-24.04
+            ruby: ruby-head
 
-          - os: { name: Ubuntu, value: ubuntu-24.04 }
-            ruby: { name: truffleruby-head, value: truffleruby-head }
+          - os: ubuntu-24.04
+            ruby: truffleruby-head
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Setup ruby (Ubuntu/macOS)
         uses: ruby/setup-ruby@e65c17d16e57e481586a6a5a0282698790062f92 # v1.300.0
         with:
-          ruby-version: ${{ matrix.ruby.value }}
+          ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - name: Configure bindgen
         shell: pwsh
         run: |
           echo "LIBCLANG_PATH=$((gcm clang).source -replace "clang.exe")" >> $env:GITHUB_ENV
           echo "BINDGEN_EXTRA_CLANG_ARGS=$((gcm clang).source -replace "bin\clang.exe","include")" >> $env:GITHUB_ENV
-        if: matrix.ruby.name == 'mswin'
+        if: matrix.ruby == 'mswin'
       - name: Run Test
         run: bin/rake spec
-        if: "!startsWith(matrix.ruby.name, 'truffleruby') && !startsWith(matrix.ruby.name, 'jruby')"
+        if: "!startsWith(matrix.ruby, 'truffleruby') && !startsWith(matrix.ruby, 'jruby')"
       - name: Run Test (JRuby)
         run: JRUBY_OPTS=--debug bin/rake spec
-        if: startsWith(matrix.ruby.name, 'jruby')
+        if: startsWith(matrix.ruby, 'jruby')
       - name: Run Test (Truffleruby)
         run: TRUFFLERUBYOPT="--experimental-options --testing-rubygems" bin/rake spec
-        if: startsWith(matrix.ruby.name, 'truffleruby')
+        if: startsWith(matrix.ruby, 'truffleruby')
 
     timeout-minutes: 20
