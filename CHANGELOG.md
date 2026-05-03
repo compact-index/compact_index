@@ -3,8 +3,9 @@
 
 Cleanup:
 
+  - Modernize CI and lint tooling for currently supported Ruby versions
   - Remove leftover legacy Sequel migrations under `db/migrations`
-  - Remove the obsolete `.rubocop_todo.yml` scaffold and fix the remaining masked offenses
+  - Simplify RuboCop configuration by removing the obsolete `.rubocop_todo.yml` scaffold and fixing the remaining masked offenses
 
 ## 0.14.0 (May 25, 2020)
 
